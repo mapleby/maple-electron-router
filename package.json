@@ -1,6 +1,6 @@
 {
     "name": "maple-electron-router",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "An electron based router.",
     "author": {
         "name": "黄运峰(mapleby)",
@@ -11,6 +11,13 @@
         "email": "mapleby@outlook.com",
         "url": ""
     },
+    "keywords": [
+        "electron",
+        "maple-electron-router",
+        "router",
+        "maple",
+        "mapleby"
+    ],
     "main": "dist/index.js",
     "typings": "types/index.d.ts",
     "files": [
@@ -20,8 +27,7 @@
     "scripts": {
         "dev": "electron test/main.js",
         "start": "electron test/main.js",
-        "build": "webpack --config  webpack.config.js",
-        "clean": "tsc --build --clean"
+        "build": "webpack --config  webpack.config.js"
     },
     "dependencies": {},
     "devDependencies": {

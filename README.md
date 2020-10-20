@@ -1,48 +1,48 @@
 # maple-electron-router  
-»ùÓÚ[electron](https://www.electronjs.org)µÄ·şÎñ¡£(Services based on [electron](https://www.electronjs.org/docs) framework.)
+åŸºäº[electron](https://www.electronjs.org)çš„æœåŠ¡ã€‚(Services based on [electron](https://www.electronjs.org/docs) framework.)
 
   [![npm version][npm-image]][npm-url]
-  [![NPM Downloads][downloads-image]][downloads-url]
+ <!-- [![NPM Downloads][downloads-image]][downloads-url]
   [![Linux Build][travis-image]][travis-url]
   [![Windows Build][appveyor-image]][appveyor-url]
-  [![Test Coverage][coveralls-image]][coveralls-url]
+  [![Test Coverage][coveralls-image]][coveralls-url] -->
 
-## Ê¾Àı(Examples)
+## ç¤ºä¾‹(Examples)
 
 #### main.js
 ```js
 const { app, BrowserWindow } = require("electron");
 const { RouterServer } = require("maple-electron-router");
 
-// ´´½¨·şÎñ(create service)
+// åˆ›å»ºæœåŠ¡(create service)
 const service = new RouterServer("app", "maple.hyf");
 const router = RouterServer.Router();
 
 
-// ÎÄ¼ş×é (file group)
+// æ–‡ä»¶ç»„ (file group)
 router.files("/", "public", { webRouter: true });
 
-// ÉèÖÃGETÇëÇó (set GET request)
+// è®¾ç½®GETè¯·æ±‚ (set GET request)
 router.get("/hello", (req, res) => {
     res.send("GET:helloWorld");
 })
 
-// ÉèÖÃPUTÇëÇó (set PUT request)
+// è®¾ç½®PUTè¯·æ±‚ (set PUT request)
 router.get("/hello", (req, res) => {
     res.send("PUT:helloWorld");
 })
 
-// ÉèÖÃPOSTÇëÇó (set POST request)
+// è®¾ç½®POSTè¯·æ±‚ (set POST request)
 router.post("/hello", (req, res) => {
     res.send("POST:helloWorld");
 });
 
-// ÖĞ¼ä¼ş (middleware)
+// ä¸­é—´ä»¶ (middleware)
 router.use("/hello", (req, res, next) => {
     next();
 });
 
-// ÉèÖÃDELETEÇëÇó (set DELETE request)
+// è®¾ç½®DELETEè¯·æ±‚ (set DELETE request)
 router.delete("/hello", (req, res) => {
     res.send("DELETE:helloWorld");
 });
@@ -92,29 +92,29 @@ app.whenReady().then(() => {
 
 ```
 
-## °²×°(Installation)
+## å®‰è£…(Installation)
 
-ÕâÊÇÒ»¸ö[node.js](https://nodejs.org/en/)Ä£¿é¿ÉÍ¨¹ı[npm](https://www.npmjs.com/)°²×°.(This is a [Node.js](https://nodejs.org/en/) module available through the
+è¿™æ˜¯ä¸€ä¸ª[node.js](https://nodejs.org/en/)æ¨¡å—å¯é€šè¿‡[npm](https://www.npmjs.com/)å®‰è£….(This is a [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/).
 )
 
-°²×°Ç°£¬ÏÂÔØ²¢°²×°[Electron](https://www.electronjs.org)²¢ÇÒ
-ElectronÒªÇó8.0.0»ò¸ü¸ß¡£(Before installing, [Electron](https://www.electronjs.org).
+å®‰è£…å‰ï¼Œä¸‹è½½å¹¶å®‰è£…[Electron](https://www.electronjs.org)å¹¶ä¸”
+Electronè¦æ±‚8.0.0æˆ–æ›´é«˜ã€‚(Before installing, [Electron](https://www.electronjs.org).
 Electron 8.0.0 or higher is required.)
 
 
-°²×°·½Ê½ [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+å®‰è£…æ–¹å¼ [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```bash
 $ npm install maple-electron-router 
 ```
 
-## (ÌØµã)Features
+## (ç‰¹ç‚¹)Features
 
-  * ·Ç¶Ë¿Ú·şÎñ(Nonport service)
-  * ¸üºÃµÄ¹ÜÀíElectronµÄÖ÷½ø³ÌºÍäÖÈ¾½ø³ÌµÄ½»»¥(Better management of electron main process and rendering process interaction)
+  * éç«¯å£æœåŠ¡(Nonport service)
+  * æ›´å¥½çš„ç®¡ç†Electronçš„ä¸»è¿›ç¨‹å’Œæ¸²æŸ“è¿›ç¨‹çš„äº¤äº’(Better management of electron main process and rendering process interaction)
 
-## (ÎÄµµ:Docs)RouterServer 
+## (æ–‡æ¡£:Docs)RouterServer 
 
  * Router
 

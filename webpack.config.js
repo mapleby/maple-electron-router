@@ -10,7 +10,7 @@ module.exports = {
     // 打包的目标
     target: "node",
     // 源码映射
-    devtool: process.env.NODE_ENV !== "production" ? "cheap-eval-source-map" : "(none)",
+    devtool: "cheap-eval-source-map",
     // 入口
     entry: path.resolve("src/index.ts"),
     // 输出
