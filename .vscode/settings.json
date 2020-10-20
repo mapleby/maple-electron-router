@@ -1,0 +1,7 @@
+{
+    "editor.tabSize": 4,
+    "editor.rulers": [100],
+    "files.exclude": {
+        "**/.git": true,
+    }
+}

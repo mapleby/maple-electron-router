@@ -1,0 +1,41 @@
+﻿{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "strict": true,
+        "jsx": "preserve",
+        "importHelpers": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+        },
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable",
+            "scripthost"
+        ],
+        "types": [
+            "electron"
+        ],
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "types/**/*.ts",
+        "types/**/*.tsx",
+        "typings/**/*.ts",
+        "typings/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "maple-electron-router", "maple-electron-router.njsproj", "{856B7FE8-043C-44B1-968F-CAB77C895590}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{856B7FE8-043C-44B1-968F-CAB77C895590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856B7FE8-043C-44B1-968F-CAB77C895590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856B7FE8-043C-44B1-968F-CAB77C895590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2B28D92-DB61-4D8C-B176-620F56059B1A}
+	EndGlobalSection
+EndGlobal
