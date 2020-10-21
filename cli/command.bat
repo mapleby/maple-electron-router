@@ -1,0 +1,4 @@
+@echo off
+
+REM Æô¶¯·þÎñ
+npm run serve
