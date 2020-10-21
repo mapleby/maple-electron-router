@@ -29,6 +29,9 @@ app.whenReady().then(() => {
             nodeIntegration: true
         }
     });
+
+    win.loadURL("app://maple.hyf")
+    win.webContents.openDevTools();
 })
 
 app.on('window-all-closed', () => {

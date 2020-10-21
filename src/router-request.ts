@@ -56,6 +56,7 @@
         let data: string | { [index: string]: any } = await res.text();
         try { data = JSON.parse(data); } catch { };
         const host = res.url.match(/[a-zA-Z0-9]*:\/\/\S+?\//);
+
         // 整理后的数据
         resolve({
             url: res.url.split("?")[0],

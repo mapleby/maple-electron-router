@@ -6,11 +6,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 // wepback打包配置
 module.exports = {
-    mode: "production",
     // 打包的目标
     target: "node",
-    // 源码映射
-    devtool: "cheap-eval-source-map",
     // 入口
     entry: path.resolve("src/index.ts"),
     // 输出
