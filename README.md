@@ -12,43 +12,54 @@
 #### main.js
 ```js
 const { app, BrowserWindow } = require("electron");
-const { RouterServer } = require("maple-electron-router");
+const { Service, Router } = require("../dist/index");
 
 // 创建服务(create service)
-const service = new RouterServer("app", "maple.hyf");
-const router = RouterServer.Router();
-
+const server = new Service("app", "maple.hyf");
 
 // 文件组 (file group)
-router.files("/", "public", { webRouter: true });
+server.files("/", "public", { webRouter: true });
 
 // 设置GET请求 (set GET request)
-router.get("/hello", (req, res) => {
+server.get("/hello", (req, res) => {
     res.send("GET:helloWorld");
 })
 
 // 设置PUT请求 (set PUT request)
-router.get("/hello", (req, res) => {
+server.put("/hello", (req, res) => {
     res.send("PUT:helloWorld");
 })
 
 // 设置POST请求 (set POST request)
-router.post("/hello", (req, res) => {
+server.post("/hello", (req, res) => {
     res.send("POST:helloWorld");
 });
 
 // 中间件 (middleware)
-router.use("/hello", (req, res, next) => {
+server.use("/hello", (req, res, next) => {
     next();
 });
 
 // 设置DELETE请求 (set DELETE request)
-router.delete("/hello", (req, res) => {
+server.delete("/hello", (req, res) => {
     res.send("DELETE:helloWorld");
 });
 
-service.use(router);
+// 创建独立路由 (Create independent router)
+const router = new Router();
 
+// 设置路由GET请求 (set router GET request)
+router.get("/get", (req, res) => {
+    res.send({
+        text: "HelloWorld!"
+    });
+});
+
+// 合并路由 (Merge router)
+server.use("/router", router);
+
+
+// 运行窗口
 app.whenReady().then(() => {
     const win = new BrowserWindow({
         width: 800,
@@ -60,6 +71,7 @@ app.whenReady().then(() => {
     win.loadURL("app://maple.hyf")
     win.webContents.openDevTools()
 })
+
 ```
 
 #### index.html
@@ -74,20 +86,44 @@ app.whenReady().then(() => {
 </head>
 
 <body>
+    <div id="get-hello"></div>
+    <div id="post-hello"></div>
+    <div id="post-router"></div>
     <script>
 
-        fetch("app://maple.hyf/hello", { method: "GET" }).then(async res => {
+        fetch("/hello", { method: "GET" }).then(async res => {
             const data = await res.text();
+            document.getElementById("get-hello").innerHTML = data;
             console.log(data)
         });
 
-        fetch("app://maple.hyf/hello", { method: "POST", body: JSON.stringify({ data: "post" }) }).then(async res => {
+        fetch("/hello", { method: "POST", body: JSON.stringify({ data: "post" }) }).then(async res => {
             const data = await res.text();
+            document.getElementById("post-hello").innerHTML = data;
+            console.log(data)
+        });
+
+        fetch("/router/get", { method: "GET" }).then(async res => {
+            const data = await res.json();
+            document.getElementById("post-router").innerHTML = JSON.stringify(data);
             console.log(data)
         });
 
     </script>
+
+    <script>
+        const { Request } = require("maple-electron-router");
+
+        Request.put("/hello").then((arg) => {
+            console.log(arg)
+        });
+
+        Request.delete("/hello").then((arg) => {
+            console.log(arg)
+        });
+    </script>
 </body>
+
 </html>
 
 ```
@@ -114,13 +150,20 @@ $ npm install maple-electron-router
   * 非端口服务(Nonport service)
   * 更好的管理Electron的主进程和渲染进程的交互(Better management of electron main process and rendering process interaction)
 
-## (文档:Docs)RouterServer 
+## (文档:Docs)Service \<Constructor\>
 
+#### 参数(Params)
+
+ * **scheme** \<string\>：协议名(Name of agreement)
+ * **host** \<string\>：域名地址(Domain name address)
+ * **privileges** \<object\>
+   * **secure** \<boolean\> 
+   * **bypassCSP** \<boolean\> 
+   * **allowServiceWorkers** \<boolean\>
+   * **corsEnabled** \<boolean\>
+
+#### 实例返回一个路由（Instance returns a router）
  * Router
-
-#### constructor
-
- * use
 
 #### Router
  
