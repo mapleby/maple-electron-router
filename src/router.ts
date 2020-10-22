@@ -8,15 +8,15 @@ import { PassThrough } from "stream";
 
 export default class Router {
     // 路由列表
-    public routers: MapleElectronRouter.Server.Router[] = [];
+    public routers: MapleElectronRouter.Service.Router[] = [];
     // 请求信息
     #request = {} as Electron.ProtocolRequest;
     // 响应回调方法
-    #callback!: MapleElectronRouter.Server.ElectronCallback;
+    #callback!: MapleElectronRouter.Service.ElectronCallback;
     // 状态码
     #code: number = 200;
     // 默认请求头
-    #headers: MapleElectronRouter.Server.Headers = { "Content-Type": "application\/json" };
+    #headers: MapleElectronRouter.Service.Headers = { "Content-Type": "application\/json" };
     // 流
     #read!: PassThrough;
     // 默认检索值
@@ -30,20 +30,20 @@ export default class Router {
     public get [Symbol.toStringTag](): string { return "MapleRouter"; }
 
     // Request请求
-    private get request(): MapleElectronRouter.Server.Request {
+    private get request(): MapleElectronRouter.Service.Request {
         // 解析url
         const url = this.#request.url ? new URL(this.#request.url) : null;
         // 获取url
         const Url = url ? url : {} as URL;
         // Query参数
-        const query: MapleElectronRouter.Server.Query = {};
+        const query: MapleElectronRouter.Service.Query = {};
         // Body参数
-        const body: MapleElectronRouter.Server.Body = {};
+        const body: MapleElectronRouter.Service.Body = {};
 
         // 对Query参数进行解析
         if (url) {
             // 整理对象
-            const arrange: MapleElectronRouter.Server.Arrange = {};
+            const arrange: MapleElectronRouter.Service.Arrange = {};
 
             // 整理请求参数
             for (const [name, value] of url.searchParams) {
@@ -111,25 +111,25 @@ export default class Router {
             pathname: Url.pathname,
             // 获取 hostname
             hostname: Url.hostname
-        } as MapleElectronRouter.Server.Request;
+        } as MapleElectronRouter.Service.Request;
     }
 
     // Response响应
-    private get response(): MapleElectronRouter.Server.Response {
-        const response: MapleElectronRouter.Server.Response = {
+    private get response(): MapleElectronRouter.Service.Response {
+        const response: MapleElectronRouter.Service.Response = {
             // 状态设置
-            status: (code: number): MapleElectronRouter.Server.Response => {
+            status: (code: number): MapleElectronRouter.Service.Response => {
                 if (typeof code === "number" && !isNaN(code)) this.#code = code;
                 return response;
             },
             // 设置请求头
-            set: (header: string, value: string): MapleElectronRouter.Server.Response => {
+            set: (header: string, value: string): MapleElectronRouter.Service.Response => {
                 if (typeof header === "string" && typeof value === "string") {
                     this.#headers[header] = value;
                 } return response;
             },
             // 写入响应数据
-            write: (data: string): MapleElectronRouter.Server.Response => {
+            write: (data: string): MapleElectronRouter.Service.Response => {
                 if (data) this.#read.push(data);
                 return response;
             },
@@ -176,7 +176,7 @@ export default class Router {
                 return () => { this.#read.push(null) };
             },
             // 响应文件
-            sendFile: (file: string, option?: MapleElectronRouter.Server.FileOption) => {
+            sendFile: (file: string, option?: MapleElectronRouter.Service.FileOption) => {
                 // 获取文件类型
                 const analy: Analy = new Analy(this.#pathname, this.#request.headers.Accept);
 
@@ -283,7 +283,7 @@ export default class Router {
     }
 
     // 监听
-    public listen(request: Electron.ProtocolRequest, callback: MapleElectronRouter.Server.ElectronCallback): void {
+    public listen(request: Electron.ProtocolRequest, callback: MapleElectronRouter.Service.ElectronCallback): void {
         // 判断参值
         if (!request || !callback) throw new Error("There must be a request body and a response callback.");
         if (typeof request !== "object") throw new Error("The request body must be a protocol object.");
@@ -308,7 +308,7 @@ export default class Router {
     }
 
     // 检查处理
-    private inspect(msg: string, path: string, callback?: MapleElectronRouter.Server.Route): string | void {
+    private inspect(msg: string, path: string, callback?: MapleElectronRouter.Service.Route): string | void {
         // 路径不是字符串
         if (typeof path !== "string") throw new Error(`Router.${msg} path must be set by string.`);
 
@@ -326,7 +326,7 @@ export default class Router {
     }
 
     // 中间件
-    public use(path: string | MapleElectronRouter.Server.Route | Router, callback?: MapleElectronRouter.Server.Route | Router): Router {
+    public use(path: string | MapleElectronRouter.Service.Route | Router, callback?: MapleElectronRouter.Service.Route | Router): Router {
         // 判断并整理路径
         const url: string | null = typeof path === "string" ? path : null;
 
@@ -366,13 +366,13 @@ export default class Router {
     }
 
     // 文件请求
-    public files(url: string, dir: string, option: MapleElectronRouter.Server.FileOption): Router {
+    public files(url: string, dir: string, option: MapleElectronRouter.Service.FileOption): Router {
         // 参数值重命名
         const root = url;
         // 获取首路径
         const index = path.join(root, "/index.html").replace(/\\/g, "/");
         // 路径信息列表
-        const urls: MapleElectronRouter.Server.FileUrl[] = [];
+        const urls: MapleElectronRouter.Service.FileUrl[] = [];
         // 获取路径方法
         const GetPath = (parent: string, dir: string) => {
             // 获取当前文件夹信息
@@ -381,7 +381,7 @@ export default class Router {
             // 遍历文件信息
             for (const dirent of dirents) {
                 // 获取url
-                const url: MapleElectronRouter.Server.FileUrl = {
+                const url: MapleElectronRouter.Service.FileUrl = {
                     path: path.join(parent, dirent.name).replace(/\\/g, "/"),
                     file: path.join(dir, dirent.name),
                     name: dirent.name
@@ -439,35 +439,35 @@ export default class Router {
     }
 
     // 所有请求
-    public all(path: string, callback?: MapleElectronRouter.Server.Route): Router {
+    public all(path: string, callback?: MapleElectronRouter.Service.Route): Router {
         const url = this.inspect("all", path, callback);
         if (url) this.routers.push({ path: url, all: callback });
         return this;
     }
 
     // get请求方法 
-    public get(path: string, callback?: MapleElectronRouter.Server.Route): Router {
+    public get(path: string, callback?: MapleElectronRouter.Service.Route): Router {
         const url = this.inspect("get", path, callback);
         if (url) this.routers.push({ path: url, get: callback });
         return this;
     }
 
     //  put请求方法
-    public put(path: string, callback?: MapleElectronRouter.Server.Route): Router {
+    public put(path: string, callback?: MapleElectronRouter.Service.Route): Router {
         const url = this.inspect("put", path, callback);
         if (url) this.routers.push({ path: url, put: callback });
         return this;
     }
 
     // post请求方法
-    public post(path: string, callback?: MapleElectronRouter.Server.Route): Router {
+    public post(path: string, callback?: MapleElectronRouter.Service.Route): Router {
         const url = this.inspect("post", path, callback);
         if (url) this.routers.push({ path: url, post: callback });
         return this;
     }
 
     // delete请求方法
-    public delete(path: string, callback?: MapleElectronRouter.Server.Route): Router {
+    public delete(path: string, callback?: MapleElectronRouter.Service.Route): Router {
         const url = this.inspect("delete", path, callback);
         if (url) this.routers.push({ path: url, delete: callback });
         return this;

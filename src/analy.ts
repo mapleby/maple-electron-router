@@ -35,7 +35,7 @@ export default class Analy {
     public get [Symbol.toStringTag](): string { return "Analy"; }
 
     // 文件类型
-    private get types(): MapleElectronRouter.Server.FileTypes {
+    private get types(): MapleElectronRouter.Service.FileTypes {
         return {
             // 文本类型
             ...this.text_type,
@@ -49,7 +49,7 @@ export default class Analy {
     }
 
     // 文本类型
-    private get text_type(): MapleElectronRouter.Server.FileTypes {
+    private get text_type(): MapleElectronRouter.Service.FileTypes {
         return {
             ".xq": "text/xml",
             ".rt": "text/vnd.rn-realtext",
@@ -103,7 +103,7 @@ export default class Analy {
     }
 
     // 音频类型
-    private get audio_type(): MapleElectronRouter.Server.FileTypes {
+    private get audio_type(): MapleElectronRouter.Service.FileTypes {
         return {
             ".ra": "audio/vnd.rn-realaudio",
             ".au": "audio/basic",
@@ -139,7 +139,7 @@ export default class Analy {
     }
 
     // 视频类型
-    private get video_type(): MapleElectronRouter.Server.FileTypes {
+    private get video_type(): MapleElectronRouter.Service.FileTypes {
         return {
             ".rv": "video/vnd.rn-realvideo",
             ".wm": "video/x-ms-wm",
@@ -167,7 +167,7 @@ export default class Analy {
     }
 
     // 图类型片
-    private get image_type(): MapleElectronRouter.Server.FileTypes {
+    private get image_type(): MapleElectronRouter.Service.FileTypes {
         return {
             ".rp": "image/vnd.rn-realpix",
             ".vst": "image/x-tga",

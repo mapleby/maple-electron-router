@@ -58,29 +58,29 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="cli\" />
+    <Folder Include="types\" />
     <Folder Include="webpack\" />
     <Folder Include="dist\" />
     <Folder Include="example\" />
     <Folder Include="example\public\" />
     <Folder Include="src\" />
     <Folder Include="test\" />
-    <Folder Include="types\" />
     <Folder Include="typings\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="src\analy.ts" />
     <TypeScriptCompile Include="src\index.ts" />
-    <TypeScriptCompile Include="src\router-request.ts" />
-    <TypeScriptCompile Include="src\router-server.ts" />
+    <TypeScriptCompile Include="src\request.ts" />
     <TypeScriptCompile Include="src\router.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="types\router-request.d.ts" />
+    <TypeScriptCompile Include="src\service.ts" />
+    <TypeScriptCompile Include="types\electron.d.ts" />
     <TypeScriptCompile Include="types\index.d.ts" />
-    <TypeScriptCompile Include="types\router-electron.d.ts" />
-    <TypeScriptCompile Include="types\router-server.d.ts" />
+    <TypeScriptCompile Include="types\request.d.ts" />
+    <TypeScriptCompile Include="types\service.d.ts" />
     <TypeScriptCompile Include="typings\request.d.ts" />
-    <TypeScriptCompile Include="typings\server.d.ts" />
+    <TypeScriptCompile Include="typings\service.d.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

@@ -16,7 +16,6 @@ module.exports = {
         path: path.resolve("dist"),
         // 文件名
         filename: "index.js",
-
         library: "MapleElectronRouter",
         libraryExport: "default",
         libraryTarget: "umd"

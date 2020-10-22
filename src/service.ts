@@ -3,9 +3,11 @@ import Router from "@/router";
 import { URL } from "url";
 
 // 路由服务
-export default class RouterServer {
+export default class Service extends Router {
     // new方法
-    constructor(scheme: string, urls: string | string[], privileges?: MapleElectronRouter.Server.Privileges) {
+    constructor(scheme: string, host: string, privileges?: MapleElectronRouter.Service.Privileges) {
+        super();
+
         // 可更改属性
         const secure = privileges && !privileges.secure ? false : true;
         const bypassCSP = privileges && privileges.bypassCSP ? true : false;
@@ -13,16 +15,19 @@ export default class RouterServer {
         const corsEnabled = privileges && privileges.corsEnabled ? true : false;
 
         // 获取url
-        this.#urls = ([] as string[]).concat(urls);
+        this.#host = host;
 
-        // 协议不正确
+        // 协议不是字符串 
         if (typeof scheme !== "string") throw new Error("Protocol scheme must be a string.");
 
-        // 协议格式不正确
-        if (/^[a-zA-Z0-9]+[a-zA-Z0-9]:\/\/[a-zA-Z0-9\._-]+[a-zA-Z0-9]$/.test(scheme)) throw new Error("The protocol format is incorrect.");
+        // 地址不是字符串 
+        if (typeof host !== "string") throw new Error("Host scheme must be a string.");
 
-        // 地址列表内容异常
-        if (this.#urls.some(arg => typeof arg !== "string")) throw new Error("There is an address in the address list that is not a string.");
+        // 协议格式不正确
+        if (!/^[a-zA-Z]+[a-zA-Z0-9]$/.test(scheme)) throw new Error("The protocol format is incorrect.");
+
+        // 地址格式不正确
+        if (!/^[a-zA-Z]+[a-zA-Z0-9\._-]+[a-zA-Z0-9]$/.test(host)) throw new Error("The host format is incorrect.");
 
         // 注册协议特权
         protocol.registerSchemesAsPrivileged([{
@@ -47,9 +52,7 @@ export default class RouterServer {
             try {
                 protocol.registerStreamProtocol(scheme, (request, callback) => {
                     const { host }: URL = new URL(request.url);
-                    for (const url of this.#urls) {
-                        if (url === host) new Router().use(this.#routers[url]).listen(request, callback);
-                    }
+                    if (this.#host === host) new Router().use(this).listen(request, callback);
                 });
             } catch (error) {
                 console.error(error);
@@ -58,25 +61,5 @@ export default class RouterServer {
     }
 
     // 地址列表
-    readonly #urls!: string[];
-    // 路由列表组
-    readonly #routers: { [url: string]: Router } = {};
-
-    // 配置标签
-    public get [Symbol.toStringTag](): string { return "MapleRouterServer"; }
-
-    // 组装路由
-    public use(url: string | Router, router?: Router) {
-        const index = typeof url === "string" ? url : this.#urls[0];
-        if (typeof url === "object") router = url;
-        if (!(typeof router === "object" && router.toString() === "[object MapleRouter]")) throw "Is not a router object.";
-        if (this.#routers[index]) this.#routers[index].use(router);
-        else this.#routers[index] = new Router().use(router);
-        return this;
-    }
-
-    // 独立路由
-    public static Router() {
-        return new Router();
-    }
+    readonly #host!: string;
 }

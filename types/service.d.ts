@@ -1,7 +1,7 @@
 import { URL } from "url";
 
 // 命名空间
-export namespace RouterServer {
+export namespace Service {
     // 协议特殊规则参数
     export interface Privileges {
         // 保护
@@ -107,21 +107,33 @@ export namespace RouterServer {
 
 // 路由列表
 export interface Router {
-    routers: RouterServer.Router[];
-    listen: (request: Electron.ProtocolRequest, callback: RouterServer.ElectronCallback) => void;
-    use: (path: string | RouterServer.Route | Router, callback?: RouterServer.Route | Router) => Router;
-    all: (path: string, callback?: RouterServer.Route) => Router;
-    get: (path: string, callback?: RouterServer.Route) => Router;
-    put: (path: string, callback?: RouterServer.Route) => Router;
-    post: (path: string, callback?: RouterServer.Route) => Router;
-    delete: (path: string, callback?: RouterServer.Route) => Router;
+    routers: Service.Router[];
+    listen: (request: Electron.ProtocolRequest, callback: Service.ElectronCallback) => void;
+    use: (path: string | Service.Route | Router, callback?: Service.Route | Router) => Router;
+    all: (path: string, callback?: Service.Route) => Router;
+    get: (path: string, callback?: Service.Route) => Router;
+    put: (path: string, callback?: Service.Route) => Router;
+    post: (path: string, callback?: Service.Route) => Router;
+    delete: (path: string, callback?: Service.Route) => Router;
 }
+
+
+// 路由类列
+export class Router {
+    routers: Service.Router[];
+    listen: (request: Electron.ProtocolRequest, callback: Service.ElectronCallback) => void;
+    use: (path: string | Service.Route | Router, callback?: Service.Route | Router) => Router;
+    all: (path: string, callback?: Service.Route) => Router;
+    get: (path: string, callback?: Service.Route) => Router;
+    put: (path: string, callback?: Service.Route) => Router;
+    post: (path: string, callback?: Service.Route) => Router;
+    delete: (path: string, callback?: Service.Route) => Router;
+}
+
 
 // 类列
-export class RouterServer {
-    constructor(scheme: string, urls: string | string[], privileges?: RouterServer.Privileges)
-    use: (url: string | Router, router?: Router) => void;
-    static Router: () => Router;
+export class Service extends Router {
+    constructor(scheme: string, urls: string | string[], privileges?: Service.Privileges);
 }
 
-export default RouterServer;
+export default Service;

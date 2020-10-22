@@ -1,11 +1,11 @@
-﻿import { RequestData } from "../types/router-request";
+﻿import { RequestParams } from "../types/request";
 
 declare global {
     export namespace MapleElectronRouter {
         export namespace Request {
-            export type Body = RequestData.Body;
-            export type Query = RequestData.Query;
-            export type Opation = RequestData.Opation;
+            export type Body = RequestParams.Body;
+            export type Query = RequestParams.Query;
+            export type Opation = RequestParams.Opation;
         }
     }
 }

@@ -1,26 +1,52 @@
 ﻿const { app, BrowserWindow } = require("electron");
-const { RouterServer } = require("../dist/index");
+const { Service, Router } = require("../dist/index");
 
-// 创建路径
-const service = new RouterServer("app", "maple.hyf");
-const router = RouterServer.Router();
+// 创建服务(create service)
+const server = new Service("app", "maple.hyf");
 
-// get请求
-router.get("/hello", (req, res) => {
+// 文件组 (file group)
+server.files("/", "public", { webRouter: true });
+
+// 设置GET请求 (set GET request)
+server.get("/hello", (req, res) => {
     res.send("GET:helloWorld");
 })
 
-// post请求
-router.post("/hello", (req, res) => {
+// 设置PUT请求 (set PUT request)
+server.put("/hello", (req, res) => {
+    res.send("PUT:helloWorld");
+})
+
+// 设置POST请求 (set POST request)
+server.post("/hello", (req, res) => {
     res.send("POST:helloWorld");
 });
 
+// 中间件 (middleware)
+server.use("/hello", (req, res, next) => {
+    next();
+});
 
-router.files("/", "example/public", { webRouter: true });
+// 设置DELETE请求 (set DELETE request)
+server.delete("/hello", (req, res) => {
+    res.send("DELETE:helloWorld");
+});
 
-service.use(router);
+// 创建独立路由 (Create independent router)
+const router = new Router();
+
+// 设置路由GET请求 (set router GET request)
+router.get("/get", (req, res) => {
+    res.send({
+        text: "HelloWorld!"
+    });
+});
+
+// 合并路由 (Merge router)
+server.use("/router", router);
 
 
+// 运行窗口
 app.whenReady().then(() => {
     const win = new BrowserWindow({
         width: 800,
@@ -29,13 +55,6 @@ app.whenReady().then(() => {
             nodeIntegration: true
         }
     });
-
     win.loadURL("app://maple.hyf")
-    win.webContents.openDevTools();
+    win.webContents.openDevTools()
 })
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
-});

@@ -8,18 +8,42 @@
 </head>
 
 <body>
+    <div id="get-hello"></div>
+    <div id="post-hello"></div>
+    <div id="post-router"></div>
     <script>
 
-        fetch("app://maple.hyf/hello", { method: "GET" }).then(async res => {
+        fetch("/hello", { method: "GET" }).then(async res => {
             const data = await res.text();
+            document.getElementById("get-hello").innerHTML = data;
             console.log(data)
         });
 
-        fetch("app://maple.hyf/hello", { method: "POST", body: JSON.stringify({ data: "post" }) }).then(async res => {
+        fetch("/hello", { method: "POST", body: JSON.stringify({ data: "post" }) }).then(async res => {
             const data = await res.text();
+            document.getElementById("post-hello").innerHTML = data;
+            console.log(data)
+        });
+
+        fetch("/router/get", { method: "GET" }).then(async res => {
+            const data = await res.json();
+            document.getElementById("post-router").innerHTML = JSON.stringify(data);
             console.log(data)
         });
 
     </script>
+
+    <script>
+        const { Request } = require("maple-electron-router");
+
+        Request.put("/hello").then((arg) => {
+            console.log(arg)
+        });
+
+        Request.delete("/hello").then((arg) => {
+            console.log(arg)
+        });
+    </script>
 </body>
+
 </html>

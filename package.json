@@ -1,6 +1,6 @@
 {
     "name": "maple-electron-router",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "An electron based router.",
     "author": {
         "name": "黄运峰(mapleby)",
@@ -22,7 +22,8 @@
     "typings": "types/index.d.ts",
     "files": [
         "dist/*.js",
-        "types/*.d.ts"
+        "types/*.d.ts",
+        "LICENSE.txt"
     ],
     "scripts": {
         "dev": "electron test/main.js",
@@ -46,5 +47,6 @@
         "webpack-cli": "^3.3.12",
         "webpack-merge": "^5.2.0",
         "webpack-node-externals": "^2.5.2"
-    }
+    },
+    "license": "TIM"
 }

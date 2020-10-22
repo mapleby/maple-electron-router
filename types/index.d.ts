@@ -1,6 +1,6 @@
-﻿import RouterServer from "./router-server";
-import RouterRequest from "./router-request";
-import { MapleElectronRouter } from "./router-electron";
+﻿import Service, { Router } from "./service";
+import Request from "./request";
+import { MapleElectronRouter } from "./electron";
 
-export { RouterServer, RouterRequest };
+export { Service, Router, Request };
 export default MapleElectronRouter;

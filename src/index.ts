@@ -1,11 +1,13 @@
-import RouterServer from "@/router-server";
-import RouterRequest from "@/router-request";
+import Router from "@/router";
+import Service from "@/service";
+import Request from "@/request";
 
 // 单个返回
-export { RouterServer, RouterRequest };
+export { Router, Service, Request };
 
 // 多个返回
 export default {
-    RouterServer: RouterServer,
-    RouterRequest: RouterRequest
+    Router: Router,
+    Service: Service,
+    Request: Request
 }
