@@ -8,11 +8,12 @@
   [![Test Coverage][coveralls-image]][coveralls-url] -->
 
 ## 示例(Examples)
+##### 项目起步时间不是很长，可能会有一些调整，请求谅解一下\^\_\^.(Project start time is not very long, there may be some adjustments, please understand\^\_\^.)
 
 #### main.js
 ```js
 const { app, BrowserWindow } = require("electron");
-const { Service, Router } = require("../dist/index");
+const { Service, Router } = require("maple-electron-router");
 
 // 创建服务(create service)
 const server = new Service("app", "maple.hyf");
@@ -71,6 +72,7 @@ app.whenReady().then(() => {
     win.loadURL("app://maple.hyf")
     win.webContents.openDevTools()
 })
+
 
 ```
 
