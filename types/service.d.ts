@@ -92,6 +92,7 @@ export namespace Service {
     export interface Router {
         path: string | null;
         use?: Route;
+        files?: Route;
         all?: Route;
         get?: Route;
         put?: Route;
@@ -110,6 +111,7 @@ export interface Router {
     routers: Service.Router[];
     listen: (request: Electron.ProtocolRequest, callback: Service.ElectronCallback) => void;
     use: (path: string | Service.Route | Router, callback?: Service.Route | Router) => Router;
+    files: (url: string, dir: string, option: Service.FileOption) => Router;
     all: (path: string, callback?: Service.Route) => Router;
     get: (path: string, callback?: Service.Route) => Router;
     put: (path: string, callback?: Service.Route) => Router;

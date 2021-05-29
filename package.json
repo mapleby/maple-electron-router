@@ -1,6 +1,6 @@
 {
     "name": "maple-electron-router",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "description": "An electron based router.",
     "author": {
         "name": "黄运峰(mapleby)",
@@ -36,6 +36,7 @@
         "electron": "^13.0.1",
         "terser-webpack-plugin": "^5.1.2",
         "ts-loader": "^9.2.2",
+        "tslib": "^2.2.0",
         "typescript": "^4.3.2",
         "webpack": "^5.38.1",
         "webpack-cli": "^4.7.0",
