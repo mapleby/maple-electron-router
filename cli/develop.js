@@ -13,7 +13,7 @@ const { spawn, spawnSync } = require("child_process");
 const dev = require("../webpack/webpack.dev.js");
 
 // 开发环境
-class Develop {
+new class Develop {
     // new 方法
     constructor() {
         // 异步监听自执行
@@ -120,6 +120,3 @@ class Develop {
         });
     }
 }
-
-// 进行执行
-new Develop();                                                                           
