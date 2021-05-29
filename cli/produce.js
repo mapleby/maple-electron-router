@@ -46,6 +46,8 @@ new class Produce {
         fs.copyFileSync(path.resolve("types/request.d.ts"), path.resolve("dist/request.d.ts"));
         fs.copyFileSync(path.resolve("types/service.d.ts"), path.resolve("dist/service.d.ts"));
         fs.copyFileSync(path.resolve("LICENSE.txt"), path.resolve("dist/LICENSE.txt"));
+        fs.copyFileSync(path.resolve("README.md"), path.resolve("dist/README.md"));
+
 
         delete pkg.scripts;
         delete pkg.devDependencies;
