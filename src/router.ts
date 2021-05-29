@@ -213,7 +213,7 @@ export default class Router {
     }
 
     // 进行下面的任务
-    private next(): void {
+    #next = (): void => {
         // 已经开始响应
         if (this.#end_status) return console.error(new Error("Response has been made, can't continue next."));
 
@@ -223,7 +223,7 @@ export default class Router {
         const response = this.response;
 
         // 获取方法并指向this
-        const next = this.next.bind(this);
+        const next = this.#next.bind(this);
 
         // 检索遍历任务
         for (let i = this.#next_index; i < this.routers.length; i++) {
@@ -304,11 +304,11 @@ export default class Router {
         this.#pathname = pathname;
 
         // 进行任务执行
-        this.next();
+        this.#next();
     }
 
     // 检查处理
-    private inspect(msg: string, path: string, callback?: MapleElectronRouter.Service.Route): string | void {
+    #inspect = (msg: string, path: string, callback?: MapleElectronRouter.Service.Route): string | void => {
         // 路径不是字符串
         if (typeof path !== "string") throw new Error(`Router.${msg} path must be set by string.`);
 
@@ -440,35 +440,35 @@ export default class Router {
 
     // 所有请求
     public all(path: string, callback?: MapleElectronRouter.Service.Route): Router {
-        const url = this.inspect("all", path, callback);
+        const url = this.#inspect("all", path, callback);
         if (url) this.routers.push({ path: url, all: callback });
         return this;
     }
 
     // get请求方法 
     public get(path: string, callback?: MapleElectronRouter.Service.Route): Router {
-        const url = this.inspect("get", path, callback);
+        const url = this.#inspect("get", path, callback);
         if (url) this.routers.push({ path: url, get: callback });
         return this;
     }
 
     //  put请求方法
     public put(path: string, callback?: MapleElectronRouter.Service.Route): Router {
-        const url = this.inspect("put", path, callback);
+        const url = this.#inspect("put", path, callback);
         if (url) this.routers.push({ path: url, put: callback });
         return this;
     }
 
     // post请求方法
     public post(path: string, callback?: MapleElectronRouter.Service.Route): Router {
-        const url = this.inspect("post", path, callback);
+        const url = this.#inspect("post", path, callback);
         if (url) this.routers.push({ path: url, post: callback });
         return this;
     }
 
     // delete请求方法
     public delete(path: string, callback?: MapleElectronRouter.Service.Route): Router {
-        const url = this.inspect("delete", path, callback);
+        const url = this.#inspect("delete", path, callback);
         if (url) this.routers.push({ path: url, delete: callback });
         return this;
     }

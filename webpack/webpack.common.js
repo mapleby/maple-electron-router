@@ -9,13 +9,16 @@ module.exports = {
     // 打包的目标
     target: "node",
     // 入口
-    entry: path.resolve("src/index.ts"),
+    entry: {
+        index: path.resolve("src/index.ts"),
+        request: path.resolve("src/request.ts"),
+    },
     // 输出
     output: {
         // 输出目录
         path: path.resolve("dist"),
         // 文件名
-        filename: "index.js",
+        filename: "[name].js",
         library: "MapleElectronRouter",
         libraryExport: "default",
         libraryTarget: "umd"
