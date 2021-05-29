@@ -1,6 +1,6 @@
 {
     "name": "maple-electron-router",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "description": "An electron based router.",
     "author": {
         "name": "黄运峰(mapleby)",
@@ -11,6 +11,7 @@
         "email": "mapleby@outlook.com",
         "url": "https://github.com/mapleby/maple-electron-router"
     },
+    "repository": "mapleby/maple-electron-router",
     "keywords": [
         "electron",
         "maple-electron-router",
