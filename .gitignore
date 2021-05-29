@@ -28,6 +28,7 @@ bld/
 [Ll]og/
 dist/
 test
+request.d.ts
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
