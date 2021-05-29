@@ -1,6 +1,6 @@
 {
     "name": "maple-electron-router",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "An electron based router.",
     "author": {
         "name": "黄运峰(mapleby)",
